@@ -1,0 +1,73 @@
+import simplebot
+import re
+import random
+import randfacts
+import wikipedia
+
+
+@simplebot.filter
+def count(message, replies):
+    """
+    This plugin is designed to take part in a bigger thing.
+    This bigger thing is called a group.
+    Actually it just counts up every number it receives.
+    Actually not every number. It just responds with a probability of 50% to let other users a chance.
+    And it adds a bit of functionality to bring fun to the group.
+    """
+    startAt = 1000
+    number = int(findNumber(message.text))
+    if number != 0 and number > startAt and random.randrange(1,3) == 2:
+        nextNumber = number + 1
+        reply = getReply(nextNumber)
+        replies.add(text=reply)
+
+def findNumber(message):
+    """
+    RegEx search for any number in the received message.
+    @returns The only number in the text or 0 if none ore more numbers found
+    """
+    found = re.findall(r'\d+', message)
+    print(found)
+    if len(found) == 1:
+        return found[0]
+    else:
+        return 0
+
+def getReply(number):
+    """
+    Main logic for defining a reply.
+    Randomly chooses a string from `switcher` or an error string.
+    """
+    rand = random.randrange(1,6)
+
+    switcher={
+    1: getWikiPerID(number),
+    2: "My time has come!\n**{}**".format(number),
+    3: "Random fact no.{}:\n\n{}".format(number, randfacts.get_fact()),
+    4: "{}".format(number)
+    }
+
+    return switcher.get(rand, "Huston, we have a problem. ERR_NO: _{}_".format(number))
+
+#
+# --- Additional functionalities for more fun ---
+#
+
+def getWikiPerID(number):
+    try:
+        summary = wikipedia.page(pageid=number).summary
+        return "Wikipedia Page #{}:\n{}".format(number, summary)
+    except:
+        return "There is no Wikipedia page with ID#{} 🙁".format(number)
+
+def getWiki(number):
+    try:
+        #summary = wikipedia.summary(query="{}".format(number), auto_suggest=False)
+        summary = wikipedia.summary(query="{}".format(number))
+        if summary.contains(str(number)):
+            return fact
+        else:
+            raise RuntimeError()
+    except:
+        return "{}".format(number)
+        
