@@ -40,7 +40,7 @@ def getReply(number):
     Randomly chooses a string from `switcher` or an error string.
     """
     rand = random.randrange(1,7)
-    rand = 5
+
     switcher={
     1: getWikiPerID(number),
     2: "My time has come!\n**{}**".format(number),
