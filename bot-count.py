@@ -13,6 +13,7 @@ def count(message, replies):
     Actually it just counts up every number it receives.
     Actually not every number. It just responds with a probability of 50% to let other users a chance.
     And it adds a bit of functionality to bring fun to the group.
+    You can browse my code here: https://github.com/the-voidl/deltabot/blob/master/bot-count.py
     """
     startAt = 1000
     number = int(findNumber(message.text))
