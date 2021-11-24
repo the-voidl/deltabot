@@ -39,13 +39,13 @@ def getReply(number):
     Main logic for defining a reply.
     Randomly chooses a string from `switcher` or an error string.
     """
-    rand = random.randrange(1,6)
-
+    rand = random.randrange(1,7)
+    rand = 5
     switcher={
     1: getWikiPerID(number),
     2: "My time has come!\n**{}**".format(number),
     3: "Random fact no.{}:\n\n{}".format(number, randfacts.get_fact()),
-    4: "{}".format(number)
+    4: "{}".format(number),
     5: getAsciiNumber(number)
     }
 
@@ -57,13 +57,20 @@ def getReply(number):
 
 def getWikiPerID(number):
     try:
-        summary = wikipedia.page(pageid=number).summary
-        return "Wikipedia Page #{}:\n{}".format(number, summary)
+        page = wikipedia.page(pageid=number)
+        return "Wikipedia Page #{}:\n{}".format(number, page.summary)
     except:
         return "There is no Wikipedia page with ID#{} 🙁".format(number)
 
 def getAsciiNumber(number):
-    numbers = [ "⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨ " ]
+    roundy = [ "⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨ " ]
+    corny = [ "0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"  ]
+    numbers = [ "" ]
+    if random.randrange(1,3) == 1:
+        numbers = roundy
+    else:
+        numbers = corny
+
     numberString = ""
     for c in str(number):
         numberString += numbers[int(c)]
