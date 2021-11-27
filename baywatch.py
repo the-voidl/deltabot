@@ -17,7 +17,7 @@ def beHappy(message, replies):
     if not message.is_text():
         return
 
-    exp = r"[😑😐😒😔😕😟🙁☹️]|(:-?[\(/])"
+    exp = r"[😑😐😒😔😕😟🙁☹️😢😥😰😭😢]|(:-?[\(/])"
     random.seed(time.time())
 
     if re.search(exp, message.text) != None :
