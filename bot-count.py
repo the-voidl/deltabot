@@ -14,7 +14,7 @@ def count(message, replies):
     Actually it just counts up every number it receives.
     Well, not every number. It just responds with a probability of 30% to let other users a chance.
     And it adds a bit of functionality to bring more fun to the group.
-    You can browse all my code here: https://github.com/the-voidl/deltabot/blob/master/
+    You can browse all my code here: https://github.com/the-voidl/deltabot/
     """
     startAt = 1000
     propability = 30
