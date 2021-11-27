@@ -5,7 +5,8 @@ import time
 
 @simplebot.filter
 def beHappy(message, replies):
-    """BeHappy: Don't worry be happy!"""
+    """BeHappy: Don't worry be happy!
+    Sends random things that make you happy. Triggered by sad smileys"""
     if not message.is_text():
         return
 

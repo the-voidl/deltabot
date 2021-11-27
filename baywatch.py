@@ -3,7 +3,8 @@ import simplebot
 
 @simplebot.filter
 def cryptWatch(message, replies):
-    """Cryptwatch: I look for law and order on this dark coast!"""
+    """Cryptwatch: I look for law and order on this dark coast!
+    I recognize unencrypted messages."""
     if not message.is_encrypted():
         replies.add(text="⚠️⚠️⚠️ This message is not encrypted ⚠️⚠️⚠️", quote=message)
 
@@ -11,7 +12,7 @@ def cryptWatch(message, replies):
 @simplebot.command
 def kick(bot, message, payload, replies):
     """Kick users from the group:
-    Either swipe to replay and send '/kick' to kick the sender
+    Either swipe to reply and send '/kick' to kick the sender
     or
     Send '/kick mail@example.com' to kick this user
     """
