@@ -38,11 +38,13 @@ And palm to palm is holy palmers’ kiss.""", sender="William Shakespeare", quot
 Ban myself off this grateful union? What a charlatan you are...""", quote=message)
         else:
             try:
+                members = []
                 for member in message.chat.get_contacts():
-                    if member.addr == acc:
-                        message.chat.remove_contact(acc)
-                        return
-                    else:
-                        replies.add("{} not in this group".format(acc))
-            except:
-                replies.add(text="Could not remove {}".format(acc))
+                    members.append(member.addr)
+                if acc in members:
+                    message.chat.remove_contact(acc)
+                else:
+                    replies.add("{} not in this group".format(acc))
+
+            except Exception as e:
+                replies.add(text="Could not remove {}\n{}".format(acc, e))
