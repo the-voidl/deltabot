@@ -1,5 +1,6 @@
 import simplebot
 import re
+import time
 import random
 import randfacts
 import wikipedia
@@ -8,7 +9,7 @@ import wikipedia
 @simplebot.filter
 def count(message, replies):
     """
-    This plugin is designed to take part in a bigger thing.
+    Bot-Count: This plugin is designed to take part in a bigger thing.
     This bigger thing is called a group.
     Actually it just counts up every number it receives.
     Well, not every number. It just responds with a probability of 30% to let other users a chance.
@@ -17,6 +18,9 @@ def count(message, replies):
     """
     startAt = 1000
     propability = 30
+
+    if not message.is_text():
+        return
 
     number = int(findNumber(message.text))
     if number != 0 and number > startAt and random.randrange(1,101) <= propability:
@@ -46,6 +50,7 @@ def getReply(number):
     elif getPortDescription(number):
         return "Port {}: {}".format(number, getPortDescription(number))
     else:
+        random.seed(time.time())
         rand = random.randrange(1,8)
 
         switcher={
