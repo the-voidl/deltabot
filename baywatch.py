@@ -1,4 +1,5 @@
 import simplebot
+import time
 
 
 @simplebot.filter
@@ -12,9 +13,11 @@ def cryptWatch(message, replies):
 @simplebot.command
 def kick(bot, message, payload, replies):
     """Kick users from the group:
-    Either swipe to reply and send '/kick' to kick the sender
+    Either swipe to reply and send '/kick' to kick the sender of this message
     or
     Send '/kick mail@example.com' to kick this user
+    or
+    Send '/kick me' to kick yourself
     """
     if not message.chat.is_group():
         replies.add(text="You must send me this command in a group.")
@@ -24,6 +27,8 @@ def kick(bot, message, payload, replies):
 
         if message.quoted_text != None:
             acc = message.quote.get_sender_contact().addr
+        elif payload == "me":
+            acc = message.get_sender_contact().addr
         elif len(payload) > 4:
             acc = payload
         else:
@@ -36,6 +41,11 @@ And palm to palm is holy palmers’ kiss.""", sender="William Shakespeare", quot
         if acc == myself:
             replies.add(text="""Ha! Ha! What ought I to do?
 Ban myself off this grateful union? What a charlatan you are...""", quote=message)
+        elif acc == "delta@voidl.de":
+            replies.add("C'mon! Kick my Papa?")
+            message.chat.remove_contact("delta@voidl.de")
+            time.sleep(5)
+            message.chat.add_contact("delta@voidl.de")
         else:
             try:
                 members = []
