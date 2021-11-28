@@ -28,7 +28,7 @@ def sendSong(message, replies):
     random.seed(time.localtime().tm_sec)
     rand = random.randrange(1,4)
     songs = {
-    1: "Listen to this: https://www.youtube.com/watch?v=L3HQMbQAWRc", # Bob Marley
+    1: "Listen to this: https://www.youtube.com/watch?v=d-diB65scQU" #Bobby McFerrin
     2: "Ooh Eeh Ooh Ah Aaahh\nhttps://www.youtube.com/watch?v=cmjrTcYMqBM", # Davis Seville
     3: "Other people even want to fuck dogs... Or pirates xD https://www.youtube.com/watch?v=RvaMi5CT3Xg" # Blink 182
     }
