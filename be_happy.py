@@ -10,7 +10,7 @@ def beHappy(message, replies):
     if not message.is_text():
         return
 
-    exp = r"[😑😐😒😔😕😟🙁☹️😢😥😰😭😢]|(?<!\w)[:;]-?[\(/]\/?"
+    exp = r"(?![😀😄☺️😁🙂])[😑😐😒😔😕😟🙁☹️😢😥😰😭😢]|(?<!\w)[:;]-?[\(/]\/?"
     random.seed(time.time())
 
     if re.search(exp, message.text) != None :
@@ -28,7 +28,7 @@ def sendSong(message, replies):
     random.seed(time.localtime().tm_sec)
     rand = random.randrange(1,4)
     songs = {
-    1: "Listen to this: https://www.youtube.com/watch?v=d-diB65scQU" #Bobby McFerrin
+    1: "Listen to this: https://www.youtube.com/watch?v=d-diB65scQU", #Bobby McFerrin
     2: "Ooh Eeh Ooh Ah Aaahh\nhttps://www.youtube.com/watch?v=cmjrTcYMqBM", # Davis Seville
     3: "Other people even want to fuck dogs... Or pirates xD https://www.youtube.com/watch?v=RvaMi5CT3Xg" # Blink 182
     }
@@ -36,9 +36,9 @@ def sendSong(message, replies):
     replies.add(text=reply, quote=message)
 
 def sendCables(message, replies):
-    reply = "Hey {}, here are some sexy cables to cheer you up :)".format(message.get_sender_contact().name)
     random.seed(time.localtime().tm_sec)
-    rand = random.randrange(0,5)
+    reply = "Hey {}, here are some sexy cables to cheer you up :)".format(message.get_sender_contact().name)
+    rand = random.randrange(0,8)
     fileName = "images/cables{}.jpg".format(rand)
     replies.add(text=reply, filename=fileName, quote=message)
 
