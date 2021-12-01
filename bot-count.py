@@ -16,10 +16,13 @@ def count(message, replies):
     And it adds a bit of functionality to bring more fun to the group.
     You can browse all my code here: https://github.com/the-voidl/deltabot/
     """
-    startAt = 1000
-    propability = 30
+    startAt = 1000    # don't count numbers lower than 'startAt'
+    propability = 30  # % to respond to an incomng message
 
     if not message.is_text():
+        return
+    # Also don't respond if the message is too old. Could be overkill after long downtime.
+    if time.time() - message.time_sent.timestamp() > 15:
         return
 
     number = int(findNumber(message.text))
@@ -58,7 +61,7 @@ def getReply(number):
         2: "My time has come!\n**{}**".format(number),
         3: "Random fact no.{}:\n\n{}".format(number, randfacts.get_fact()),
         4: "{}".format(number),
-        5: getAsciiNumber(number),
+        5: getUnicodeNumber(number),
         6: getPiPos(number)
         }
         return switcher.get(rand, "Huston, we have a problem. ERR_NO: _{}_".format(number))
@@ -74,7 +77,7 @@ def getWikiPerID(number):
     except:
         return "There is no Wikipedia page with ID#{} 🙁".format(number)
 
-def getAsciiNumber(number):
+def getUnicodeNumber(number):
     roundy = [ "⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨ " ]
     corny = [ "0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"  ]
     numbers = [ "" ]
