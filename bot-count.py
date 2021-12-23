@@ -22,7 +22,7 @@ def count(message, replies):
     if not message.is_text():
         return
     # Also don't respond if the message is too old. Could be overkill after long downtime.
-    if time.time() - message.time_sent.timestamp() > 15:
+    if time.time() - message.time_sent.timestamp() > 60:
         return
 
     number = int(findNumber(message.text))
@@ -36,7 +36,7 @@ def findNumber(message):
     RegEx search for any number in the received message.
     @returns The only number in the text or 0 if none ore more numbers found
     """
-    found = re.findall(r'\d+', message)
+    found = re.findall(r'(?<!(http|www|:).+)\d+', message)
     print(found)
     if len(found) == 1:
         return found[0]
@@ -62,7 +62,8 @@ def getReply(number):
         3: "Random fact no.{}:\n\n{}".format(number, randfacts.get_fact()),
         4: "{}".format(number),
         5: getUnicodeNumber(number),
-        6: getPiPos(number)
+        6: getPiPos(number),
+        7: "💸💰🤑 BITC0IN!!one\n\nWanna get rich? Send {} B|TC0|N5 to me and get double the amount back!!!!!\n\nYOU will only PROFIT from this amazing deal!\n\n💸💰🤑".format(number)
         }
         return switcher.get(rand, "Huston, we have a problem. ERR_NO: _{}_".format(number))
 
