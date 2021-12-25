@@ -25,6 +25,11 @@ def count(message, replies):
     if time.time() - message.time_sent.timestamp() > 60:
         return
 
+    hour = time.localtime().tm_hour
+    if message.get_sender_contact().addr == "weltenschlange@mailbox.org" and hour < 5:
+        replies.add(text="Hey Philipp! Du bist nicht die einzige Nachteule hier 😜", quote=message)
+        propability = 100
+
     number = int(findNumber(message.text))
     if number != 0 and number > startAt and random.randrange(1,101) <= propability:
         nextNumber = number + 1
@@ -36,11 +41,13 @@ def findNumber(message):
     RegEx search for any number in the received message.
     @returns The only number in the text or 0 if none ore more numbers found
     """
-    found = re.findall(r'(?<!(http|www|:).+)\d+', message)
-    print(found)
-    if len(found) == 1:
+    found = re.findall(r'\d+', message)
+    #do not match links
+    linkmatch = len(re.findall(r'(http|www|:)', message))
+    if len(found) == 1 and linkmatch < 1:
         return found[0]
     else:
+        print("RETURN 0")
         return 0
 
 def getReply(number):
