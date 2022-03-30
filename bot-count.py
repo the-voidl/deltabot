@@ -17,18 +17,13 @@ def count(message, replies):
     You can browse all my code here: https://github.com/the-voidl/deltabot/
     """
     startAt = 1000    # don't count numbers lower than 'startAt'
-    propability = 30  # % to respond to an incomng message
+    propability = 25  # % to respond to an incomng message
 
     if not message.is_text():
         return
     # Also don't respond if the message is too old. Could be overkill after long downtime.
     if time.time() - message.time_sent.timestamp() > 60:
         return
-
-    hour = time.localtime().tm_hour
-    if message.get_sender_contact().addr == "weltenschlange@mailbox.org" and hour < 5:
-        replies.add(text="Hey Philipp! Du bist nicht die einzige Nachteule hier 😜", quote=message)
-        propability = 100
 
     number = int(findNumber(message.text))
     if number != 0 and number > startAt and random.randrange(1,101) <= propability:
