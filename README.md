@@ -1,3 +1,10 @@
+This repo was archived since DeltaChat is no more than a mail client now. Some may still see use in using the app though - it still integrates autocrypt and some other nice features. But not usable as pure chat client any more, except you use a dedicated address for DeltaChat.
+
+
+
+---
+
+
 Having fun with DeltaChat
 ---
 
